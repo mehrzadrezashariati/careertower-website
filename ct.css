@@ -174,10 +174,9 @@
 .ct-sec{padding:64px 0}.ct-top{margin-bottom:34px}
 @media(max-width:1100px){.nav-login{display:none}}
 .mobile-nav.show{flex-direction:column;position:sticky;top:70px;z-index:19;background:#fff;box-shadow:0 9px 20px #1232;padding:10px 24px 20px;gap:14px;font-size:14px;font-weight:800}.mobile-nav a{color:#163349}.mobile-nav a.on{color:#a67c40}
-#ueber-uns{position:relative;padding:0;border-bottom:0;background:#0e2a3b url(assets/founder.jpg) 72% 22%/cover no-repeat;min-height:min(720px,calc(100vh - 84px));display:flex;align-items:center}
-#ueber-uns .ct-wrap.ct-about{display:block;width:100%;padding-top:64px;padding-bottom:64px}
-#ueber-uns .ct-about-pic{display:none}
-#ueber-uns .ct-about>div{max-width:580px;background:rgba(14,42,59,.72);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);padding:40px 42px;color:#e7eef1}
-#ueber-uns .ct-h2{color:#fff}#ueber-uns .ct-h2 em{color:#ddb879}#ueber-uns .eyebrow{color:#ddb879}
-#ueber-uns .ct-aside{color:#d3dfe4;border-color:#ddb879}#ueber-uns .ct-about-links a{color:#ddb879}
-@media(max-width:900px){#ueber-uns{display:block;min-height:0;background-size:100% auto;background-position:center top;padding-top:56vw}#ueber-uns .ct-wrap.ct-about{padding:0}#ueber-uns .ct-about>div{max-width:none;background:rgba(14,42,59,.94);padding:32px 24px;margin-top:-60px;position:relative}}
+#ueber-uns .ct-about{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px}
+#ueber-uns .ct-about-pic{position:relative;margin:0;max-width:540px}
+#ueber-uns .ct-about-pic img{max-width:none;width:100%;aspect-ratio:auto;object-fit:contain;object-position:center}
+#ueber-uns .ct-about-pic figcaption{position:absolute;left:0;right:0;bottom:0;margin:0;padding:12px 16px;background:rgba(14,42,59,.62);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);color:#d3dfe4;font-size:13px}
+#ueber-uns .ct-about-pic figcaption b{color:#fff}
+@media(max-width:900px){#ueber-uns .ct-about{grid-template-columns:1fr;gap:28px}#ueber-uns .ct-about-pic{max-width:480px}}
