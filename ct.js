@@ -4,16 +4,16 @@ let lang='de';
 try{const s=localStorage.getItem('gaia_lang');if(s==='en'||s==='de')lang=s}catch(_){}
 if(q.get('lang')==='en'||q.get('lang')==='de')lang=q.get('lang');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const NAV={de:{navServices:'Center of Excellence',navExample:'Beispiel',navCircle:'GAIA Circle',navPubs:'Publikationen',navAbout:'Über uns',navCycle:'Vorgehen',navUse:'Anwendungen',navContact:'Kontakt',ctHow:'So funktioniert es',ctEx:'Beispiel',ctFeat:'Funktionen',ctPilot:'Pilot',ctFaq:'FAQ',ctGaia:'GAIA PATH ↗',ctDemo:'Demo anfragen',ctLogin:'Anmelden',ctFor:'Für wen'},en:{navServices:'Center of Excellence',navExample:'Example',navCircle:'GAIA Circle',navPubs:'Publications',navAbout:'About',navCycle:'Approach',navUse:'Use cases',navContact:"Let's talk",ctHow:'How it works',ctEx:'Example',ctFeat:'Features',ctPilot:'Pilot',ctFaq:'FAQ',ctGaia:'GAIA PATH ↗',ctDemo:'Request a demo',ctLogin:'Sign in',ctFor:"Who it's for"}};
+const NAV={de:{navServices:'Center of Excellence',navExample:'Beispiel',navCircle:'GAIA Circle',navPubs:'Publikationen',navAbout:'Über uns',navCycle:'Vorgehen',navUse:'Anwendungen',navContact:'Kontakt',ctHow:'So funktioniert es',ctEx:'Beispiel',ctFeat:'Funktionen',ctPilot:'Pilot',ctFaq:'FAQ',ctGaia:'GAIA PATH ↗',ctDemo:'Demo anfragen',ctLogin:'Anmelden',ctFor:'Für wen',ctStart:'Start',ctData:'Datenschutz',ctDemoNav:'Demo'},en:{navServices:'Center of Excellence',navExample:'Example',navCircle:'GAIA Circle',navPubs:'Publications',navAbout:'About',navCycle:'Approach',navUse:'Use cases',navContact:"Let's talk",ctHow:'How it works',ctEx:'Example',ctFeat:'Features',ctPilot:'Pilot',ctFaq:'FAQ',ctGaia:'GAIA PATH ↗',ctDemo:'Request a demo',ctLogin:'Sign in',ctFor:"Who it's for",ctStart:'Home',ctData:'Data protection',ctDemoNav:'Demo'}};
 const T={
 de:{
-title:'Career Tower – KI-gestützte Bewerbungsunterlagen · GAIA PATH',
+pStart:'Career Tower – Bewerbungen, die nur sagen, was stimmt',pHow:'So funktioniert es – Career Tower',pFeat:'Funktionen – Career Tower',pData:'Datenschutz und Daten – Career Tower',pPilot:'Pilot und FAQ – Career Tower',pDemo:'Demo anfragen – Career Tower',pLogin:'Anmelden – Career Tower',title:'Career Tower – KI-gestützte Bewerbungsunterlagen · GAIA PATH',
 back:'← Zurück zu GAIA PATH',
 heroEye:'Career Tower · Für Jobsuchende, Coaches und Träger',
 heroTitle:'Bewerbungen, die nur sagen,<br><em>was wirklich stimmt.</em>',
 heroText:'Career Tower ist das erste Produkt von GAIA PATH. Aus dem Lebenslauf entsteht ein geprüfter Master-Lebenslauf. Für jede passende Stelle schreibt die KI daraus einen Lebenslauf und ein Anschreiben, nur mit belegten Fakten. Was man prüfen sollte, ist markiert. Die KI zeigt, der Mensch entscheidet: Nichts blockiert, nichts wird automatisch versendet.',
 badges:['KI-gestützt mit Claude von Anthropic','Nur belegte Fakten','Nichts wird automatisch versendet','Deutsch und US-Englisch'],
-ctaDemo:'Demo anfragen',ctaHow:'Für wen ist es?',
+ctaDemo:'Demo anfragen',ctaHow:'So funktioniert es',
 heroCap:'Stein auf Stein: Jede Aussage in den Unterlagen ruht auf einem Beleg.',
 whyEye:'Warum Career Tower',
 whyTitle:'Mehr gute Bewerbungen,<br><em>ohne erfundene Erfahrung.</em>',
@@ -77,13 +77,13 @@ fMissing:'Bitte Name und eine gültige E-Mail-Adresse angeben.',fSending:'Wird g
 statusNote:'Career Tower befindet sich in der Pilotphase und ist noch nicht allgemein verfügbar. Die beschriebenen Funktionen entsprechen dem Stand vom 24. November 2026. Alle Beispiele auf dieser Seite sind fiktiv (Beispielperson „Lena Berger“). Es werden keine Zahlen aus Kundenprojekten gezeigt.'
 },
 en:{
-title:'Career Tower – AI-supported application documents · GAIA PATH',
+pStart:'Career Tower – Applications that only say what is true',pHow:'How it works – Career Tower',pFeat:'Features – Career Tower',pData:'Data protection – Career Tower',pPilot:'Pilot and FAQ – Career Tower',pDemo:'Request a demo – Career Tower',pLogin:'Sign in – Career Tower',title:'Career Tower – AI-supported application documents · GAIA PATH',
 back:'← Back to GAIA PATH',
 heroEye:'Career Tower · For job seekers, coaches and providers',
 heroTitle:'Applications that only say<br><em>what is actually true.</em>',
 heroText:'Career Tower is the first product of GAIA PATH. Your résumé becomes a verified master résumé. For every matching job, AI uses it to write a résumé and a cover letter with verified facts only. Anything worth a second look is highlighted. AI shows, people decide: nothing blocks you, nothing is sent automatically.',
 badges:['AI-supported with Claude by Anthropic','Verified facts only','Nothing is sent automatically','German and US English'],
-ctaDemo:'Request a demo',ctaHow:'Who is it for?',
+ctaDemo:'Request a demo',ctaHow:'How it works',
 heroCap:'Stone by stone: every statement in the documents rests on evidence.',
 whyEye:'Why Career Tower',
 whyTitle:'More good applications,<br><em>no invented experience.</em>',
@@ -157,30 +157,31 @@ const d=document.getElementById('ctDemo');clearTimeout(timer);d.classList.remove
 const items=[...d.querySelectorAll('.ct-checks li'),...d.querySelectorAll('.ct-stmts li')];items.forEach(x=>x.classList.remove('on'));
 let i=0;const step=()=>{if(i<items.length){items[i++].classList.add('on');timer=setTimeout(step,instant?0:420)}else{d.classList.add('done');d.querySelector('#ctPlay span').textContent=c.exAgain}};
 if(instant){items.forEach(x=>x.classList.add('on'));d.classList.add('done');d.querySelector('#ctPlay span').textContent=c.exAgain}else step()}
+const $id=k=>document.getElementById(k)||{set innerHTML(v){},set textContent(v){},querySelector(){return{addEventListener(){}}},addEventListener(){}};
 function draw(){
-const c=T[lang];document.documentElement.lang=lang;document.title=c.title;
+const c=T[lang];document.documentElement.lang=lang;document.title=c[document.body.dataset.page]||c.title;
 document.querySelectorAll('[data-t]').forEach(el=>{const v=c[el.dataset.t];if(v!=null)el.innerHTML=v});
-document.getElementById('ctBack').textContent=c.back;
+$id('ctBack').textContent=c.back;
 document.querySelectorAll('[data-i]').forEach(el=>{const v=NAV[lang][el.dataset.i];if(v==null)return;const sp=el.querySelector('span');if(el.classList.contains('nav-cta')&&sp){el.firstChild.nodeValue=v+' '}else el.textContent=v});
-document.getElementById('ctBadges').innerHTML=c.badges.map(b=>`<span>${esc(b)}</span>`).join('');
-document.getElementById('ctWhy').innerHTML=c.why.map((w,i)=>`<article class="ct-card"><span class="no">0${i+1}</span><h3>${esc(w[0])}</h3><p>${esc(w[1])}</p></article>`).join('');
-document.getElementById('ctSteps').innerHTML=c.steps.map(s=>`<li><h3>${esc(s[0])}</h3><p>${esc(s[1])}</p><span class="who${s[3]?' h':''}">${esc(s[2])}</span></li>`).join('');
-const d=document.getElementById('ctDemo');d.innerHTML=demoHTML(c);d.querySelector('#ctPlay').addEventListener('click',()=>play(c,false));
-if(q.get('ex')==='done')play(c,true);
-document.getElementById('ctFeats').innerHTML=c.feats.map((f,i)=>`<article class="ct-feat"><span class="ico" aria-hidden="true">${String(i+1).padStart(2,'0')}</span><h3>${esc(f[1])}</h3><p>${esc(f[2])}</p></article>`).join('');
-document.getElementById('ctSpot').innerHTML=`<div><p class="eyebrow light">${esc(c.spotEye)}</p><h3>${c.spotTitle}</h3>${c.spotText.map(t=>`<p>${esc(t)}</p>`).join('')}</div><div><ul>${c.spotList.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p class="honest">${esc(c.spotHonest)}</p></div>`;
-document.getElementById('ctPrins').innerHTML=c.prins.map(p=>`<div class="ct-prin"><strong>${esc(p[0])}</strong><p>${esc(p[1])}</p></div>`).join('');
-document.getElementById('ctDpYes').innerHTML=c.dpYes.map(x=>`<li>${esc(x)}</li>`).join('');
-document.getElementById('ctDpNo').innerHTML=c.dpNo.map(x=>`<li>${esc(x)}</li>`).join('');
-document.getElementById('ctPhases').innerHTML=c.phases.map(p=>`<div class="ct-phase"><small>${esc(p[0])}</small><strong>${esc(p[1])}</strong><p>${esc(p[2])}</p></div>`).join('');
-document.getElementById('ctScope').innerHTML=c.scope.map(s=>`<div><strong>${esc(s[0])}</strong><span>${esc(s[1])}</span></div>`).join('');
-document.getElementById('ctFaq').innerHTML=c.faq.map((f,i)=>`<details${i===0?' open':''}><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('');
-document.getElementById('ctRqList').innerHTML=c.rqList.map(x=>`<li>${esc(x)}</li>`).join('');
-const sel=document.getElementById('fSize');const cur=sel.selectedIndex;sel.innerHTML=c.sizes.map(s=>`<option>${esc(s)}</option>`).join('');if(cur>0)sel.selectedIndex=cur;
+$id('ctBadges').innerHTML=c.badges.map(b=>`<span>${esc(b)}</span>`).join('');
+$id('ctWhy').innerHTML=c.why.map((w,i)=>`<article class="ct-card"><span class="no">0${i+1}</span><h3>${esc(w[0])}</h3><p>${esc(w[1])}</p></article>`).join('');
+$id('ctSteps').innerHTML=c.steps.map(s=>`<li><h3>${esc(s[0])}</h3><p>${esc(s[1])}</p><span class="who${s[3]?' h':''}">${esc(s[2])}</span></li>`).join('');
+const d=document.getElementById('ctDemo');if(d){d.innerHTML=demoHTML(c);d.querySelector('#ctPlay').addEventListener('click',()=>play(c,false));
+if(q.get('ex')==='done')play(c,true)}
+$id('ctFeats').innerHTML=c.feats.map((f,i)=>`<article class="ct-feat"><span class="ico" aria-hidden="true">${String(i+1).padStart(2,'0')}</span><h3>${esc(f[1])}</h3><p>${esc(f[2])}</p></article>`).join('');
+$id('ctSpot').innerHTML=`<div><p class="eyebrow light">${esc(c.spotEye)}</p><h3>${c.spotTitle}</h3>${c.spotText.map(t=>`<p>${esc(t)}</p>`).join('')}</div><div><ul>${c.spotList.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><p class="honest">${esc(c.spotHonest)}</p></div>`;
+$id('ctPrins').innerHTML=c.prins.map(p=>`<div class="ct-prin"><strong>${esc(p[0])}</strong><p>${esc(p[1])}</p></div>`).join('');
+$id('ctDpYes').innerHTML=c.dpYes.map(x=>`<li>${esc(x)}</li>`).join('');
+$id('ctDpNo').innerHTML=c.dpNo.map(x=>`<li>${esc(x)}</li>`).join('');
+$id('ctPhases').innerHTML=c.phases.map(p=>`<div class="ct-phase"><small>${esc(p[0])}</small><strong>${esc(p[1])}</strong><p>${esc(p[2])}</p></div>`).join('');
+$id('ctScope').innerHTML=c.scope.map(s=>`<div><strong>${esc(s[0])}</strong><span>${esc(s[1])}</span></div>`).join('');
+$id('ctFaq').innerHTML=c.faq.map((f,i)=>`<details${i===0?' open':''}><summary>${esc(f[0])}</summary><p>${esc(f[1])}</p></details>`).join('');
+$id('ctRqList').innerHTML=c.rqList.map(x=>`<li>${esc(x)}</li>`).join('');
+const sel=document.getElementById('fSize');if(sel){const cur=sel.selectedIndex;sel.innerHTML=c.sizes.map(s=>`<option>${esc(s)}</option>`).join('');if(cur>0)sel.selectedIndex=cur}
 document.querySelectorAll('#ctLang [data-lang]').forEach(b=>{const on=b.dataset.lang===lang;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on))});
-const st=document.getElementById('ctStatus');st.textContent='';st.className='status'}
+const st=document.getElementById('ctStatus');if(st){st.textContent='';st.className='status'}}
 document.getElementById('ctLang').addEventListener('click',e=>{const b=e.target.closest('[data-lang]');if(!b||b.dataset.lang===lang)return;lang=b.dataset.lang;try{localStorage.setItem('gaia_lang',lang)}catch(_){}q.set('lang',lang);history.replaceState(null,'','?'+q.toString()+location.hash);draw()});
-document.getElementById('ctForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,c=T[lang],st=document.getElementById('ctStatus'),btn=f.querySelector('button');
+($id('ctForm')).addEventListener('submit',async e=>{e.preventDefault();const f=e.target,c=T[lang],st=document.getElementById('ctStatus'),btn=f.querySelector('button');
 if(f._honey.value)return;const name=f.name.value.trim(),email=f.email.value.trim();
 if(!name||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){st.className='status err';st.textContent=c.fMissing;return}
 btn.disabled=true;st.className='status';st.textContent=c.fSending;
