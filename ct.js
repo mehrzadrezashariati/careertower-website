@@ -4,7 +4,7 @@ let lang='de';
 try{const s=localStorage.getItem('gaia_lang');if(s==='en'||s==='de')lang=s}catch(_){}
 if(q.get('lang')==='en'||q.get('lang')==='de')lang=q.get('lang');
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const NAV={de:{navServices:'Center of Excellence',navExample:'Beispiel',navCircle:'GAIA Circle',navPubs:'Publikationen',navAbout:'Über uns',navCycle:'Vorgehen',navUse:'Anwendungen',navContact:'Kontakt'},en:{navServices:'Center of Excellence',navExample:'Example',navCircle:'GAIA Circle',navPubs:'Publications',navAbout:'About',navCycle:'Approach',navUse:'Use cases',navContact:"Let's talk"}};
+const NAV={de:{navServices:'Center of Excellence',navExample:'Beispiel',navCircle:'GAIA Circle',navPubs:'Publikationen',navAbout:'Über uns',navCycle:'Vorgehen',navUse:'Anwendungen',navContact:'Kontakt',ctHow:'So funktioniert es',ctEx:'Beispiel',ctFeat:'Funktionen',ctPilot:'Pilot',ctFaq:'FAQ',ctGaia:'GAIA PATH ↗',ctDemo:'Demo anfragen'},en:{navServices:'Center of Excellence',navExample:'Example',navCircle:'GAIA Circle',navPubs:'Publications',navAbout:'About',navCycle:'Approach',navUse:'Use cases',navContact:"Let's talk",ctHow:'How it works',ctEx:'Example',ctFeat:'Features',ctPilot:'Pilot',ctFaq:'FAQ',ctGaia:'GAIA PATH ↗',ctDemo:'Request a demo'}};
 const T={
 de:{
 title:'Career Tower – KI-gestützte Bewerbungsunterlagen · GAIA PATH',
